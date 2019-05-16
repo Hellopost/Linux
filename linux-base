@@ -1,0 +1,43 @@
+1.	cat /proc/cpuinfo或/proc/menifo 看cpu核数及physical cpu数 或内存
+2.	mkfs.Ext4以ext4文件系统方式格式化
+3.	/etc/profile下可以让alias别名后重启不失效，让修改环境变量PATH全局可用（可以用命令source profile生效不需要关机）
+4.	编辑磁盘配额是的/etc/fstab时，添加usrquota，grpquota时用命令mount -o remount /etc/fstab 实现不重启可以使该设置生效，
+5.	更改主机名永久生效就配置/etc/sysconfig/network 或用命令systemctl set-hostname
+6.	/etc/resolv.conf文件就是加DNS。nameserver=网关地址，即可
+7.	centos下/boot/grub/grub.conf显示开机时的内核位置、timeout、开机时菜单等
+8.	cat /etc/fstab 看挂载的分区
+9.	/etc/rc.local和/etc/profile开机自动执行其下的代码，例如挂载光驱。
+10.	/etc/inittab设置运行级别
+11.	秘钥设置>>在家目录创建.ssh/文件夹在其中建authorized_keys文件，放入生成的秘钥，getenforce查看selinux防火墙，setenforce 0关闭selinux，或改/etc/selinux/config永久生效。Ubuntu用命令ufw disable 关闭防火墙。
+12.	ubuntu。在家目录创建.ssh/文件夹，连接时会生成：记录连接授权信息的known_hosts文件。执行ssh-keygen命令生成秘钥id_rsa和公钥id_rsa.pub，将公钥上传到客户端即可。
+别名：创建config文件配置如下：
+Host  myserver
+HostName  ip地址
+User  username
+Post  22
+13.	安装System-config-network-tui包或安装setuptool包，可以配置网卡网络
+14.	/etc/hosts.allow或/etc/hosts.deny限制IP，用户登录
+15.	配置/etc/ssh/sshd_config
+能使用密钥尽量避免使用密码登陆(PermitRootLogin without-password )
+可以禁止root直接登陆服务器，只允许普通用户登陆，普通用户su到			root(PermitRootLogin no )
+
+16.	Inode索引节点，记录文件的一些属性信息。（属主等）
+17.	/etc/rsyslog.conf管理日志的服务rsyslog的配置文件，常用日志：/var/log/messages系统核心日志。/var/log/secure安全，认证，登录相关日志。/var/log/maillog 邮件相关的日志。/var/log/wtmp记录命令last的日志。/var/log/dmesg硬件产生的信息日志
+18.	chkconfig --level 2345 smb on关掉服务。还可以用ntsysv程序
+19.	sendmail 邮件系统使用的两个主要协议是：SMTP 和 POP ，前者用来发送邮件,后 者用来接收邮件
+20.	日常监控都需要监控哪些？  
+1)硬件：  CPU：/proc/cpuinfo  内存：/proc/meminfo  硬盘：fdisk -l  
+2)系统：  负载：/proc/loadavg  uptime查看实时 load average、swap  
+虚拟内存：vmstat（参数-s；2 4）SUID,用户,进程  
+系统日志：tail -f /var/log/messages
+21.	在/etc/fstab 文件中指定的文件系统加载参数中，noauto参数一般用于 CD-ROM 等移动设备
+22.	建立动态路由需要用到的文件是/etc/gateways
+23.	硬链接就是让链接文件的 i 节点号指向被链接文件的 i 节点，硬连接不能链接目录文件
+24.	/usr/sbin/inetd进程是运行 Internet 超级服务器，它负责监听 Internet sockets 上的连接，并调用合适的服务器来处理接收的 信息
+25.	mc 是 UNIX 风格操作系统的目录浏览器/文件管理器
+26.	用 ftp 进行文件传输时，有两种模式：ASCII 和 binary
+27.	Linux 将存储设备和输入/输出设备均看做文件来操作， i节点表不是以文件的形式出现
+28.	i 节点是一个 64 字节长的表，表中包含了文件的相关信息，其中有文件的大小、文件所有 、者、文件的存取许可方式以及文件的类型等重要信息。在 i 节点表中最重要的内容是磁盘地址表 。在磁盘地址表中有 13 个块号，文件将以块号在磁盘地址表中出现的顺序依次读取相应的块。文件系统通过把 i 节点和文件名进行连接，得到该文件相对应的 i 节点号，通过该 i 节点的磁盘地址表把分散存放的文件物理块连接成文件的逻辑结构
+29.	进程启动有手动启动（ls -l）和调度启动（crontab、at、batch）
+30.	在 Linux 系统下限制用户使用的磁盘空间可以使用 edquota  
+
